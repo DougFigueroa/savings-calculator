@@ -25,3 +25,8 @@ jobs:
     # Runs a single command using the runners shell
     - name: python-lint
       uses: CyberZHG/github-action-python-lint@0.0.2
+    - name: Coveralls Python
+      uses: AndreMiras/coveralls-python-action@v20200412
+      with:
+        # Set to `true` to increase logger verbosity.
+        debug: true # optional
