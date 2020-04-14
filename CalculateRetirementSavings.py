@@ -2,9 +2,19 @@ import logging
 
 logging.basicConfig(level=logging.INFO)
 
-def calculate_savings(age,amount,interest,m_capitalize):
+def calculate_savings(age,retire_age,amount,interest,m_capitalize):
+    months_saving=(retire_age-age)*12
+    years_saving=(retire_age-age)*12
+    savings = 0
+    if m_capitalize:
+        interest_cap = interest/12
+        for i in range(1, months_saving+1):
+            savings += amount*(1+(interest_cap/100))
+    else:
+        for i in range(1, years_saving+1):
+            savings += amount*(1+(interest/100))
     
-    return True
+    return savings
 
 # Function to validete if the date has the correct format DEPRECATED
 # def validate_date(date_in):
@@ -19,6 +29,7 @@ def main():
     monthly_saving = 0
     percent_interest_generated = -1
     monthly_capitalize = False
+    retirement_age = 60
 
     # Input and validate if entry is in correct format
     while starting_age <= 0:
@@ -33,7 +44,9 @@ def main():
     if percent_interest_generated > 0:
         monthly_capitalize = True if str(input('The savings are monthly capitalize? (type Y: yes and N: no if the savings are annually capitalize): ')).upper()=='Y' else False
         print(monthly_capitalize)
-    # calculate_savings(starting_age,monthly_saving,percent_interest_generated,monthly_capitalize)
+    result = calculate_savings(starting_age,retirement_age,monthly_saving,percent_interest_generated,monthly_capitalize)
+    print('The savings at age of '+str(retirement_age)+' will be: \n')
+    print(result)
 
 if __name__=='__main__':
     main()
