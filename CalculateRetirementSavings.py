@@ -3,16 +3,17 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 def calculate_savings(age,retire_age,amount,interest,m_capitalize):
-    months_saving=(retire_age-age)*12
-    years_saving=(retire_age-age)*12
+    years_saving=(retire_age-age)
+    months_saving=years_saving*12
     savings = 0
     if m_capitalize:
         interest_cap = interest/12
         for i in range(1, months_saving+1):
-            savings += amount*(1+(interest_cap/100))
+            savings = (savings+amount)*(1+(interest_cap/100))
     else:
+        anual_amount=amount*12
         for i in range(1, years_saving+1):
-            savings += amount*(1+(interest/100))
+            savings = (savings+anual_amount)*(1+(interest/100))
     
     return savings
 
